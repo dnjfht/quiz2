@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Progress from "./Progress";
 import { useSelector, useDispatch } from "react-redux";
 import { AddUserAnswer } from "../redux/modules/quiz";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.div`
   width: 100%;
@@ -16,19 +18,47 @@ const Wrap = styled.div`
 
 const QuizWrap = styled.div`
   width: 100%;
-  height: 660px;
-  background-color: bisque;
+  height: 680px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const QuizNumber = styled.h1`
+  font-size: 2.6rem;
   font-family: "ddagfont";
+
+  & > span {
+    margin-right: 4px;
+    padding: 10px 26px;
+    background: rgb(238, 174, 202);
+    background: linear-gradient(
+      90deg,
+      rgba(238, 174, 202, 1) 0%,
+      rgba(148, 187, 233, 1) 100%
+    );
+    border-radius: 100px;
+  }
 `;
 
-const QuizImg = styled.img``;
+const QuizImg = styled.img`
+  width: 300px;
+  height: 300px;
+`;
+
+const Question = styled.h3`
+  width: 100%;
+  margin-top: -10px;
+
+  font-size: 1.6rem;
+  text-align: center;
+  font-weight: 500;
+`;
 
 const AnswerSelector = styled.div`
-  width: 100%;
-  background-color: pink;
+  width: 200px;
 
   display: flex;
   flex-direction: row;
@@ -40,7 +70,15 @@ const AnswerSelectorButton = styled.button`
   border: none;
 
   font-size: 6rem;
-  color: white;
+  color: rgb(34, 193, 195);
+
+  transition: all 0.8s;
+
+  &:hover {
+    color: rgb(253, 187, 45);
+
+    cursor: pointer;
+  }
 `;
 
 export default function Quiz() {
@@ -50,13 +88,30 @@ export default function Quiz() {
   const user_answer = useSelector((state) => state.quiz.user_answer);
   console.log(user_answer);
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (quiz_list.length === user_answer.length) {
+      navigate("/score");
+      return;
+    }
+  }, [user_answer]);
+
+  if (quiz_list.length === user_answer.length) {
+    return null;
+  }
+
   return (
     <Wrap>
       <Progress />
-
       <QuizWrap>
-        <QuizNumber>{`${user_answer.length + 1}번째 퀴즈`}</QuizNumber>
-        <QuizImg src={`../image/${quiz_list.image}`} />
+        <QuizNumber>
+          <span>{user_answer.length + 1}</span>번째 퀴즈
+        </QuizNumber>
+
+        <QuizImg src={quiz_list[user_answer.length].image} />
+
+        <Question>{quiz_list[user_answer.length].quiz}</Question>
 
         <AnswerSelector>
           <AnswerSelectorButton
