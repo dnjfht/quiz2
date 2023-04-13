@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Wrap = styled.div`
@@ -9,6 +10,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const ImgWrap = styled.img`
@@ -57,9 +59,33 @@ const ScoreNumber = styled.h1`
   }
 `;
 
-const ResultText = styled.p``;
+const ResultText = styled.p`
+  font-size: 1.2rem;
+`;
+
+const GoCommentButton = styled.button`
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+  background: rgb(253, 187, 45);
+  border: none;
+  border-radius: 30px;
+
+  color: white;
+  font-size: 1rem;
+
+  transition: all 0.5s;
+
+  &:hover {
+    background: rgb(34, 193, 195);
+
+    cursor: pointer;
+  }
+`;
 
 export default function Score() {
+  const navigate = useNavigate();
+
   const quiz_list = useSelector((state) => state.quiz.quiz_list);
   const user_answer = useSelector((state) => state.quiz.user_answer);
   const name = useSelector((state) => state.quiz.name);
@@ -100,6 +126,14 @@ export default function Score() {
       </ScoreNumber>
 
       <ResultText>{result_text}</ResultText>
+
+      <GoCommentButton
+        onClick={() => {
+          navigate("./message");
+        }}
+      >
+        {name} 이상형에 대한 추측 한마디...?
+      </GoCommentButton>
     </Wrap>
   );
 }
