@@ -68,13 +68,12 @@ export default function Score() {
 
   const random_number = Math.floor(Math.random() * 10);
 
-  const _score =
-    (100 / quiz_list.length) *
-    user_answer.map((answer, idx) => {
-      if (answer === quiz_list[idx].answer) {
-        return answer;
-      }
-    }).length;
+  const collect_answer = user_answer.filter((answer, idx) => {
+    return answer === quiz_list[idx].answer;
+  }).length;
+
+  const _score = (100 / quiz_list.length) * collect_answer;
+  console.log(_score);
 
   const score = Math.floor(_score);
 
