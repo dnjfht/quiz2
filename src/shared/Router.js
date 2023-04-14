@@ -5,6 +5,7 @@ import Quiz from "../components/Quiz";
 import Score from "../components/Score";
 import Message from "../components/Message";
 import Ranking from "../components/Ranking";
+import NotPage from "../components/NotPage";
 
 export default function Router() {
   return (
@@ -15,6 +16,7 @@ export default function Router() {
         <Route path="/score" element={<Score />} />
         <Route path="/message" element={<Message />} />
         <Route path="/ranking" element={<Ranking />} />
+        <Route path="*" element={<NotPage />} />
       </Routes>
     </>
   );
