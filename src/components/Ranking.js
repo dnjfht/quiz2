@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { ResetUserAnswer } from "../redux/modules/quiz";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { loadQuizFB } from "../redux/modules/rank";
 
 const Wrap = styled.div`
   width: 100%;
@@ -155,6 +157,10 @@ export default function Ranking() {
     return b.score - a.score;
   });
   console.log(_rank);
+
+  useEffect(() => {
+    dispatch(loadQuizFB());
+  }, []);
 
   const handleResetUserAnswer = () => {
     dispatch(ResetUserAnswer());
