@@ -120,7 +120,7 @@ const RankComment = styled.p`
 `;
 
 const ResetButton = styled.button`
-  width: 100%;
+  width: 1140px;
   height: 50px;
   margin-top: 10px;
   background: rgb(253, 187, 45);
@@ -129,6 +129,11 @@ const ResetButton = styled.button`
 
   color: white;
   font-size: 1rem;
+
+  position: fixed;
+  bottom: 54px;
+  left: 50%;
+  margin-left: -574px;
 
   transition: all 0.5s;
 

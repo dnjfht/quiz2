@@ -115,7 +115,9 @@ export default function Score() {
 
   return (
     <Wrap>
-      <ImgWrap src={quiz_list[random_number].image} />
+      <ImgWrap
+        src={process.env.PUBLIC_URL + `${quiz_list[random_number].image}`}
+      />
 
       <Title>
         <span>{name}</span> 퀴즈에 대한 내 점수는?

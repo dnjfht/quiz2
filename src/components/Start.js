@@ -1,20 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AddUserName } from "../redux/modules/rank";
-
-import img1 from "../image/1.png";
-import img2 from "../image/2.png";
-import img3 from "../image/3.png";
-import img4 from "../image/5.png";
-import img5 from "../image/5.png";
-import img6 from "../image/6.png";
-import img7 from "../image/7.png";
-import img8 from "../image/8.png";
-import img9 from "../image/9.png";
-import img10 from "../image/10.png";
 
 const Wrap = styled.div`
   width: 100%;
@@ -117,18 +106,7 @@ export default function Start() {
   const navigate = useNavigate();
 
   const name = "유승민";
-  const imageArr = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
-    img9,
-    img10,
-  ];
+
   const randomNumber = Math.floor(Math.random() * 10);
 
   const userNameInputRef = useRef(null);
@@ -143,6 +121,8 @@ export default function Start() {
     navigate("/quiz");
   };
 
+  const quiz_list = useSelector((state) => state.quiz.quiz_list);
+
   return (
     <Wrap>
       <Square>
@@ -152,7 +132,9 @@ export default function Start() {
           얼마나 알고 있을까?
         </Title>
 
-        <ImgWrap src={imageArr[randomNumber]} />
+        <ImgWrap
+          src={process.env.PUBLIC_URL + `${quiz_list[randomNumber].image}`}
+        />
 
         <UserNameInput
           type="text"

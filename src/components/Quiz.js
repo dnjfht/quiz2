@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Progress from "./Progress";
 import { useSelector, useDispatch } from "react-redux";
-import { AddUserAnswer } from "../redux/modules/quiz";
+import quiz, { AddUserAnswer } from "../redux/modules/quiz";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -109,7 +109,11 @@ export default function Quiz() {
           <span>{user_answer.length + 1}</span>번째 퀴즈
         </QuizNumber>
 
-        <QuizImg src={quiz_list[user_answer.length].image} />
+        <QuizImg
+          src={
+            process.env.PUBLIC_URL + `${quiz_list[user_answer.length].image}`
+          }
+        />
 
         <Question>{quiz_list[user_answer.length].quiz}</Question>
 

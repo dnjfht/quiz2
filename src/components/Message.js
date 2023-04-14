@@ -136,7 +136,9 @@ export default function Message() {
         }}
       />
       <ContentWrap>
-        <ImgWrap src={quiz_list[random_number].image} />
+        <ImgWrap
+          src={process.env.PUBLIC_URL + `${quiz_list[random_number].image}`}
+        />
 
         <Title>
           <span>{name}</span>의 이상형에 대한 추측 한 마디...?
