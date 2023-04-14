@@ -129,7 +129,7 @@ export default function Score() {
 
       <GoCommentButton
         onClick={() => {
-          navigate("./message");
+          navigate("/message");
         }}
       >
         {name} 이상형에 대한 추측 한마디...?

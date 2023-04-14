@@ -91,7 +91,7 @@ const quiz = (state = initialState, action) => {
       return { ...state, user_answer: newUserAnswer };
     }
     case RESETUSERANSWER: {
-      return;
+      return { ...state, user_answer: [] };
     }
     default:
       return state;
