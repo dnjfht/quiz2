@@ -1,5 +1,6 @@
 // action value
 const ADDUSERNAME = "add_user_name";
+const GETRANK = "get_rank";
 const ADDRANK = "add_rank";
 
 // action creator
