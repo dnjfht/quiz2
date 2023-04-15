@@ -4,7 +4,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
-import { AddRank } from "../redux/modules/rank";
+import { AddRank, addQuizFB } from "../redux/modules/rank";
 
 const Wrap = styled.div`
   width: 100%;
@@ -122,7 +122,7 @@ export default function Message() {
       current: true,
     };
 
-    dispatch(AddRank(new_rank));
+    dispatch(addQuizFB(new_rank));
 
     navigate("/ranking");
   };

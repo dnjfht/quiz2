@@ -99,6 +99,27 @@ const Grade = styled.p`
   }
 `;
 
+const ScoreNumber = styled.p`
+  width: 140px;
+  height: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+  border-right: ${(props) =>
+    props.highlight === true ? "1px solid #f6589d" : "1px solid #fff"};
+
+  font-size: 2rem;
+  color: ${(props) => (props.highlight === true ? "#f6589d" : "white")};
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  & > span {
+    color: #0eb1c0;
+  }
+`;
+
 const RankingUserData = styled.div`
   width: 1000px;
   padding: 24px;
@@ -151,12 +172,10 @@ export default function Ranking() {
   const navigate = useNavigate();
 
   const rank = useSelector((state) => state.rank.rank);
-  console.log(rank);
 
   const _rank = rank.sort((a, b) => {
     return b.score - a.score;
   });
-  console.log(_rank);
 
   useEffect(() => {
     dispatch(loadQuizFB());
@@ -176,12 +195,15 @@ export default function Ranking() {
 
       <RankingWrap>
         {_rank.map((r, idx) => {
-          if (r.current) {
+          if (r.current === true) {
             return (
               <RankingData key={idx} highlight={true}>
                 <Grade>
                   <span>{idx + 1}</span>등
                 </Grade>
+                <ScoreNumber>
+                  <span>{r.score}</span>점
+                </ScoreNumber>
 
                 <RankingUserData>
                   <RankName>{r.name}</RankName>
@@ -189,19 +211,24 @@ export default function Ranking() {
                 </RankingUserData>
               </RankingData>
             );
-          }
-          return (
-            <RankingData key={idx}>
-              <Grade highlight={true}>
-                <span>{idx + 1}</span>등
-              </Grade>
+          } else if (!r.current) {
+            return (
+              <RankingData key={idx}>
+                <Grade highlight={true}>
+                  <span>{idx + 1}</span>등
+                </Grade>
 
-              <RankingUserData>
-                <RankName highlight={true}>{r.name}</RankName>
-                <RankComment highlight={true}>{r.comment}</RankComment>
-              </RankingUserData>
-            </RankingData>
-          );
+                <ScoreNumber highlight={true}>
+                  <span>{r.score}</span>점
+                </ScoreNumber>
+
+                <RankingUserData>
+                  <RankName highlight={true}>{r.name}</RankName>
+                  <RankComment highlight={true}>{r.comment}</RankComment>
+                </RankingUserData>
+              </RankingData>
+            );
+          }
         })}
 
         <ResetButton onClick={handleResetUserAnswer}>다시하기</ResetButton>

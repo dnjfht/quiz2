@@ -54,11 +54,25 @@ export const loadQuizFB = () => {
   };
 };
 
+export const addQuizFB = (payload) => {
+  return async function (dispatch) {
+    const docRef = await addDoc(collection(db, "quiz"), payload);
+    const _quiz = await getDoc(docRef);
+    const quiz = { id: _quiz.id, ..._quiz.data() };
+    dispatch(AddRank(quiz));
+
+    // 추가한 데이터 중 id를 가져와서 bucket_data 만들기.
+    // const bucket_data = { id: docRef.id, ...payload };
+    // // 마지막으로 액션 일으키기 (수정해달라고 요청)
+    // dispatch(createWidget(bucket_data));
+  };
+};
+
 // initialState
 const initialState = {
   user_name: "",
   rank: [
-    // { score: 90, name: "유승민", comment: "내 이상형이 딱 보이지 않니?" },
+    // { score: 100, name: "방가방가", comment: "다들 잘생겼다" },
     // { score: 40, name: "이하늘", comment: "너무 어려운데..." },
     // { score: 60, name: "오하요~!", comment: "잘 생긴 사람이 곧 이상형" },
   ],
