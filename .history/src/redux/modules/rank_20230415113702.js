@@ -57,9 +57,9 @@ export const loadQuizFB = () => {
 export const addQuizFB = (payload) => {
   return async function (dispatch) {
     const docRef = await addDoc(collection(db, "quiz"), payload);
-    // const _quiz = await getDoc(docRef);
-    // const quiz = { id: _quiz.id, ..._quiz.data() };
-    // dispatch(AddRank(quiz));
+    const _quiz = await getDoc(docRef);
+    const quiz = { id: _quiz.id, ..._quiz.data() };
+    dispatch(AddRank(quiz));
 
     // 추가한 데이터 중 id를 가져와서 bucket_data 만들기.
     // const bucket_data = { id: docRef.id, ...payload };
