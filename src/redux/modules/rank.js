@@ -82,6 +82,7 @@ const initialState = {
 const rank = (state = initialState, action) => {
   switch (action.type) {
     case GETRANK: {
+      console.log(action.payload);
       return { ...state, rank: action.payload };
     }
     case ADDUSERNAME: {

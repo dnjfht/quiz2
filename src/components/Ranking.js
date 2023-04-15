@@ -168,18 +168,19 @@ const ResetButton = styled.button`
 `;
 
 export default function Ranking() {
+  useEffect(() => {
+    dispatch(loadQuizFB());
+  }, []);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const rank = useSelector((state) => state.rank.rank);
+  console.log(rank);
 
   const _rank = rank.sort((a, b) => {
     return b.score - a.score;
   });
-
-  useEffect(() => {
-    dispatch(loadQuizFB());
-  }, []);
 
   const handleResetUserAnswer = () => {
     dispatch(ResetUserAnswer());
